@@ -1,0 +1,114 @@
+#quore-nav {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+#main-container {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+#homepage-container h1 {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-detail-container {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#region-detail-container h1 {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-detail-container h1 button {
+  margin: 0px 5px;
+}
+#region-detail-container .table-container {
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+#region-detail-container .table-container table {
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-detail-container .table-container table td:first-child {
+  font-weight: bold;
+}
+#region-detail-container .table-container table td {
+  padding: 5px;
+}
+#region-edit-container {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#region-edit-container h1 {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-edit-container .region-form-container {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  padding: 20px;
+  width: 400px;
+}
+#region-delete-container {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#region-delete-container h1 {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-delete-container .table-container {
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+#region-delete-container .table-container table {
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-delete-container .table-container table td:first-child {
+  font-weight: bold;
+}
+#region-delete-container .table-container table td {
+  padding: 5px;
+}
+#region-delete-container .table-container .actions {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+#region-delete-container .table-container .actions button {
+  margin-left: 10px;
+}
+#region-list-container {
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+#region-list-container h1 {
+  display: inline-block;
+}
+#region-list-container td.actions {
+  width: 50px;
+}

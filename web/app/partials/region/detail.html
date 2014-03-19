@@ -1,0 +1,25 @@
+<div id="region-detail-container">
+    <h1>
+        Region {{region.id}}
+        <button ui-sref="regionEdit({regionId:region.id})" type="button" class="create btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span> 
+        </button>
+        <button ui-sref="regionDelete({regionId:region.id})" type="button" class="create btn btn-danger">
+            <span class="glyphicon glyphicon-trash"></span> 
+        </button>
+    </h1>
+    <div class="table-container">
+        <table class="quore-detail-table">
+            <tbody>
+                <tr>
+                    <td>Id</td>
+                    <td>{{region.id}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{region.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

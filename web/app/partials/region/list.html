@@ -1,0 +1,34 @@
+<div id="region-list-container">
+    <h1>
+        Regions
+        <button ui-sref="regionCreate" type="button" class="create btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span> 
+        </button>
+    </h1>
+
+    <table ng-controller="RegionListController" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="region in regions">
+                <td><a ui-sref="region({regionId:region.id})" href="">{{region.id}}</a></td>
+                <td>{{region.name}}</td>
+                <td class="actions">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown" href=""><span class="glyphicon glyphicon-cog"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a href="" ui-sref="region({regionId:region.id})">View</a></li>
+                            <li><a href="" ui-sref="regionEdit({regionId:region.id})">Edit</a></li>
+                            <li><a href="" ui-sref="regionDelete({regionId:region.id})">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

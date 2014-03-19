@@ -1,0 +1,13 @@
+{
+    "name": "quore/fun",
+    "description": "Source code for quore fun",
+    "type": "project",
+    "require": {
+        "doctrine/orm": "2.4.*",
+        "zaphpa/zaphpa": "1.x"
+
+    },
+    "autoload": {
+        "psr-0": {"": "src/"}
+    }
+}
