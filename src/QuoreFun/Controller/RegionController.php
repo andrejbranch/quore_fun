@@ -49,8 +49,14 @@ class RegionController extends QuoreController
     public function delete($request, $response)
     {
         $region = $this->getRegion($request->params['id']);
+        $properties = $this->getPropertyRepository()->findByRegionId($region->getId());
 
         $em = $this->getEntityManager();
+
+        foreach ($properties as $property) {
+            $em->remove($property);
+        }
+
         $em->remove($region);
         $em->flush();
     }
@@ -63,5 +69,10 @@ class RegionController extends QuoreController
     private function getRegionRepository()
     {
         return $this->getEntityManager()->getRepository('QuoreFun\Entity\Region');
+    }
+
+    private function getPropertyRepository()
+    {
+        return $this->getEntityManager()->getRepository('QuoreFun\Entity\Property');
     }
 }

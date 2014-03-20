@@ -8,31 +8,37 @@ services.factory('Region', ['$resource', function ($resource) {
     return $resource('/region/:regionId')
 }]);
 
+services.factory('Property', ['$resource', function ($resource) {
+    return $resource('/property/:regionId/:propertyId')
+}]);
+
 // Controllers
 
 controllers.controller('HomeController', function HomeController ($scope) {
     console.info('Im home')
-
 })
 
 controllers.controller('RegionListController', function ($scope, Region) {
     $scope.regions = Region.query()
 })
 
-controllers.controller('RegionController', function ($scope, Region, $stateParams) {
-    $scope.region = Region.get({regionId:$stateParams.regionId})
+controllers.controller('RegionController', function ($scope, Region, $stateParams, Property) {
+    var regionId = $stateParams.regionId
+
+    $scope.region = Region.get({regionId:regionId})
+    $scope.properties = Property.query({regionId:$stateParams.regionId})
 })
 
 controllers.controller('RegionEditController', function ($scope, Region, $stateParams, $state) {
     $scope.region = Region.get({regionId:$stateParams.regionId})
 
     $scope.cancel = function () {
-        $state.go('regionList')
+        window.history.back();
     }
 
     $scope.save = function () {
         $scope.region.$save({regionId:$stateParams.regionId}, function () {
-            $state.go('regionList')
+            $state.go('region', {regionId:$stateParams.regionId})
         })
     }
 })
@@ -41,7 +47,7 @@ controllers.controller('RegionCreateController', function ($scope, Region, $stat
     $scope.region = new Region()
 
     $scope.cancel = function () {
-        $state.go('regionList')
+        window.history.back();
     }
 
     $scope.save = function () {
@@ -55,12 +61,68 @@ controllers.controller('RegionDeleteController', function ($scope, Region, $stat
     $scope.region = Region.get({regionId:$stateParams.regionId})
 
     $scope.cancel = function () {
-        $state.go('regionList')
+        window.history.back();
     }
 
     $scope.delete = function () {
         $scope.region.$delete({regionId:$stateParams.regionId}, function () {
             $state.go('regionList')
+        })
+    }
+})
+
+controllers.controller('PropertyListController', function ($scope, Property) {
+    $scope.properties = Property.query()
+})
+
+controllers.controller('PropertyController', function ($scope, Property, $stateParams) {
+    $scope.regionId = $stateParams.regionId
+    $scope.property = Property.get({regionId:$stateParams.regionId, propertyId:$stateParams.propertyId})
+})
+
+controllers.controller('PropertyEditController', function ($scope, Property, $stateParams, $state) {
+    var regionId = $stateParams.regionId,
+        propertyId = $stateParams.propertyId
+    ;
+
+    $scope.property = Property.get({regionId:regionId, propertyId:propertyId})
+
+    $scope.cancel = function () {
+        window.history.back();
+    }
+
+    $scope.save = function () {
+        $scope.property.$save({regionId:regionId, propertyId:propertyId}, function () {
+            $state.go('region', {regionId:regionId})
+        })
+    }
+})
+
+controllers.controller('PropertyCreateController', function ($scope, Property, $stateParams, $state, Region) {
+    $scope.property = new Property()
+    $scope.region = Region.get({regionId:$stateParams.regionId})
+
+    $scope.cancel = function () {
+        window.history.back();
+    }
+
+    $scope.save = function () {
+        $scope.property.$save({regionId:$stateParams.regionId}, function () {
+            $state.go('region', {regionId:$stateParams.regionId})
+        })
+    }
+})
+
+controllers.controller('PropertyDeleteController', function ($scope, Property, $stateParams, $state) {
+    $scope.property = Property.get({propertyId:$stateParams.propertyId})
+
+    $scope.cancel = function () {
+        window.history.back();
+    }
+
+    $scope.delete = function () {
+        $scope.property.$delete({propertyId:$stateParams.propertyId}, function () {
+            $state.go('propertyList')
         })
     }
 })
@@ -106,6 +168,31 @@ app.config(['$stateProvider', function ($stateProvider) {
             url: '/region/:regionId/delete',
             templateUrl: '/app/partials/region/delete.html',
             controller: 'RegionDeleteController'
+        })
+        .state('propertyList', {
+            url: '/properties',
+            templateUrl: '/app/partials/property/list.html',
+            controller: 'PropertyListController'
+        })
+        .state('property', {
+            url: '/property/:regionId/:propertyId/detail',
+            templateUrl: '/app/partials/property/detail.html',
+            controller: 'PropertyController'
+        })
+        .state('propertyCreate', {
+            url: '/property/:regionId/:propertyId/create',
+            templateUrl: '/app/partials/property/edit.html',
+            controller: 'PropertyCreateController'
+        })
+        .state('propertyEdit', {
+            url: '/property/:regionId/:propertyId/edit',
+            templateUrl: '/app/partials/property/edit.html',
+            controller: 'PropertyEditController'
+        })
+        .state('propertyDelete', {
+            url: '/property/:propertyId/delete',
+            templateUrl: '/app/partials/property/delete.html',
+            controller: 'PropertyDeleteController'
         })
     ;
 }]);

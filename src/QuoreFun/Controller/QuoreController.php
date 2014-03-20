@@ -44,7 +44,7 @@ abstract class QuoreController
     private function initializeEntityManager()
     {
         $paths = array("src/QuoreFun/Entity");
-        $isDevMode = false;
+        $isDevMode = true;
 
         // the connection configuration
         $dbParams = array(
@@ -54,7 +54,7 @@ abstract class QuoreController
             'dbname'   => 'quore_fun',
         );
 
-        $config = Setup::createAnnotationMetadataConfiguration($paths, 'false');
+        $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 
         $this->entityManager = EntityManager::create($dbParams, $config);
     }

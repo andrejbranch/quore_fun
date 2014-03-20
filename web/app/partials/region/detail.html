@@ -2,10 +2,10 @@
     <h1>
         Region {{region.id}}
         <button ui-sref="regionEdit({regionId:region.id})" type="button" class="create btn btn-info">
-            <span class="glyphicon glyphicon-pencil"></span> 
+            <span class="glyphicon glyphicon-pencil"></span>
         </button>
         <button ui-sref="regionDelete({regionId:region.id})" type="button" class="create btn btn-danger">
-            <span class="glyphicon glyphicon-trash"></span> 
+            <span class="glyphicon glyphicon-trash"></span>
         </button>
     </h1>
     <div class="table-container">
@@ -22,4 +22,12 @@
             </tbody>
         </table>
     </div>
+
+    <h1>
+        Properties in {{region.name}}
+        <button ui-sref="propertyCreate({regionId:region.id})" type="button" class="create btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </h1>
+    <div ng-include="'app/partials/property/list.html'"></div>
 </div>

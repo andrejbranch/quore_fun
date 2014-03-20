@@ -1,0 +1,37 @@
+<div id="region-detail-container">
+    <h1>
+        Property {{property.id}}
+        <button ui-sref="propertyEdit({regionId:regionId, propertyId:property.id})" type="button" class="create btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span> 
+        </button>
+        <button ui-sref="propertyDelete({regionId:regionId, propertyId:property.id})" type="button" class="create btn btn-danger">
+            <span class="glyphicon glyphicon-trash"></span> 
+        </button>
+    </h1>
+    <div class="table-container">
+        <table class="quore-detail-table">
+            <tbody>
+                <tr>
+                    <td>Id</td>
+                    <td>{{property.id}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{property.name}}</td>
+                </tr>
+                <tr>
+                    <td>Brand</td>
+                    <td>{{property.brand}}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{{property.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Url</td>
+                    <td>{{property.url}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Phone</th>
+            <th>Url</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="property in properties">
+            <td><a ui-sref="property({propertyId:property.id})" href="">{{property.id}}</a></td>
+            <td>{{property.name}}</td>
+            <td>{{property.brand}}</td>
+            <td>{{property.phone}}</td>
+            <td>{{property.url}}</td>
+            <td class="actions">
+                <div class="dropdown">
+                    <a data-toggle="dropdown" href=""><span class="glyphicon glyphicon-cog"></span></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a href="" ui-sref="property({regionId:region.id, propertyId:property.id})">View</a></li>
+                        <li><a href="" ui-sref="propertyEdit({regionId:region.id, propertyId:property.id})">Edit</a></li>
+                        <li><a href="" ui-sref="propertyDelete({regionId:region.id, propertyId:property.id})">Delete</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

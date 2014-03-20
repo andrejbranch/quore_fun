@@ -40,5 +40,18 @@ class Router
             'get' => array('QuoreFun\Controller\RegionController', 'query'),
             'post' => array('QuoreFun\Controller\RegionController', 'create'),
         ));
+
+        $this->router->addRoute(array(
+            'path' => '/property/{regionId}/{propertyId}',
+            'get' => array('QuoreFun\Controller\PropertyController', 'get'),
+            'post' => array('QuoreFun\Controller\PropertyController', 'update'),
+            'delete' => array('QuoreFun\Controller\PropertyController', 'delete'),
+        ));
+
+        $this->router->addRoute(array(
+            'path' => '/property/{regionId}',
+            'get' => array('QuoreFun\Controller\PropertyController', 'query'),
+            'post' => array('QuoreFun\Controller\PropertyController', 'create'),
+        ));
     }
 }
