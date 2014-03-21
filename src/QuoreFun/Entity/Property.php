@@ -2,37 +2,55 @@
 
 namespace QuoreFun\Entity;
 
+use Doctrine\ORM\Mapping AS ORM;
 use QuoreFun\Entity\Region;
+use QuoreFun\Service\Validation\Constraint as Assert;
 use QuoreFun\Service\Validation\Verifiable;
 
 /**
- * @Entity(repositoryClass="PropertyRepository")
- * @Table(name="properties")
+ * @ORM\Entity(repositoryClass="PropertyRepository")
+ * @ORM\Table(name="properties")
  */
 class Property implements Verifiable
 {
     /**
-     * @Id @Column(type="integer")
-     * @GeneratedValue
+     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     protected $id;
 
     /**
-     * @ManyToOne(targetEntity="QuoreFun\Entity\Region", inversedBy="properties")
+     * @ORM\ManyToOne(targetEntity="QuoreFun\Entity\Region", inversedBy="properties")
      * @ORM\JoinColumn(name="regionId", nullable=false)
      */
     protected $region;
 
-    /** @Column(type="string", length=50) **/
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\LengthConstraint(length=50)
+     * @Assert\NotNullConstraint()
+     */
     protected $name;
 
-    /** @Column(type="string", length=25) **/
+    /**
+     * @ORM\Column(type="string", length=25)
+     * @Assert\LengthConstraint(length=25)
+     * @Assert\NotNullConstraint()
+     */
     protected $brand;
 
-    /** @Column(type="string", length=25) **/
+    /**
+     * @ORM\Column(type="string", length=25)
+     * @Assert\LengthConstraint(length=25)
+     * @Assert\NotNullConstraint()
+     */
     protected $phone;
 
-    /** @Column(type="string", length=255) **/
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\LengthConstraint(length=255)
+     * @Assert\NotNullConstraint()
+     */
     protected $url;
 
     /**
@@ -114,51 +132,9 @@ class Property implements Verifiable
 
     public function hydrateFromArray(array $data)
     {
-        $this->name = $data['name'];
-        $this->brand = $data['brand'];
-        $this->phone = $data['phone'];
-        $this->url = $data['url'];
-    }
-
-    public function getPropertyValidators()
-    {
-        return array(
-            array(
-                'property' => 'name',
-                'constraint' => 'LengthConstraint',
-                'length' => '50',
-            ),
-            array(
-                'property' => 'name',
-                'constraint' => 'NotNullConstraint',
-            ),
-            array(
-                'property' => 'brand',
-                'constraint' => 'LengthConstraint',
-                'length' => '50',
-            ),
-            array(
-                'property' => 'brand',
-                'constraint' => 'NotNullConstraint',
-            ),
-            array(
-                'property' => 'phone',
-                'constraint' => 'LengthConstraint',
-                'length' => '50',
-            ),
-            array(
-                'property' => 'phone',
-                'constraint' => 'NotNullConstraint',
-            ),
-            array(
-                'property' => 'url',
-                'constraint' => 'LengthConstraint',
-                'length' => '50',
-            ),
-            array(
-                'property' => 'url',
-                'constraint' => 'NotNullConstraint',
-            ),
-        );
+        $this->name = isset($data['name']) ? $data['name'] : null;
+        $this->brand = isset($data['brand']) ? $data['brand'] : null;
+        $this->phone = isset($data['phone']) ? $data['phone'] : null;
+        $this->url = isset($data['url']) ? $data['url'] : null;
     }
 }

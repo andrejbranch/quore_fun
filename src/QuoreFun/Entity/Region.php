@@ -2,19 +2,25 @@
 
 namespace QuoreFun\Entity;
 
+use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use QuoreFun\Service\Validation\Constraint as Assert;
 use QuoreFun\Service\Validation\Verifiable;
 
 /**
- * @Entity(repositoryClass="RegionRepository")
- * @Table(name="regions")
+ * @ORM\Entity(repositoryClass="RegionRepository")
+ * @ORM\Table(name="regions")
  */
 class Region implements Verifiable
 {
-    /** @Id @Column(type="integer") @GeneratedValue **/
+    /** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue **/
     protected $id;
 
-    /** @Column(type="string", length=50) **/
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\LengthConstraint(length=50)
+     * @Assert\NotNullConstraint
+     */
     protected $name;
 
     /** @ORM\OneToMany(targetEntity="QuoreFun\Entity\Property", mappedBy="region") */
@@ -72,20 +78,5 @@ class Region implements Verifiable
     public function hydrateFromArray(array $data)
     {
         $this->name = isset($data['name']) ? $data['name'] : null;
-    }
-
-    public function getPropertyValidators()
-    {
-        return array(
-            array(
-                'property' => 'name',
-                'constraint' => 'LengthConstraint',
-                'length' => '50',
-            ),
-            array(
-                'property' => 'name',
-                'constraint' => 'NotNullConstraint',
-            ),
-        );
     }
 }

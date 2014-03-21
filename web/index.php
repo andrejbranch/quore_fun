@@ -13,5 +13,5 @@ try {
 } catch (\Exception $ex) {
     header("Content-Type: application/json;", TRUE, 404);
     $out = array("error" => $ex->getMessage());
-    die($ex->getMessage());
+    die(print_r($ex));
 }

@@ -2,7 +2,9 @@
 
 namespace QuoreFun\Controller;
 
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\Setup;
 use QuoreFun\Service\Validation\Validator;
 use Symfony\Component\Yaml\Yaml;
@@ -60,13 +62,16 @@ abstract class QuoreController
     private function initializeEntityManager()
     {
         $paths = array("src/QuoreFun/Entity");
-        $isDevMode = false;
+        $isDevMode = true;
 
         // the connection configuration
-        $yamlParams = Yaml::parse(file_get_contents(__DIR__.'/../../../config/database.yml'));
+        $connectionParams = Yaml::parse(file_get_contents(__DIR__.'/../../../config/database.yml'));
 
-        $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+        $driver = new AnnotationDriver(new AnnotationReader(), $paths);
 
-        $this->entityManager = EntityManager::create($yamlParams['database'], $config);
+        $config = Setup::createConfiguration($isDevMode);
+        $config->setMetadataDriverImpl($driver);
+
+        $this->entityManager = EntityManager::create($connectionParams['database'], $config);
     }
 }
