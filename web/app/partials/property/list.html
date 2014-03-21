@@ -11,7 +11,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="property in properties">
-            <td><a ui-sref="property({propertyId:property.id})" href="">{{property.id}}</a></td>
+            <td><a ui-sref="property({regionId:region.id, propertyId:property.id})" href="">{{property.id}}</a></td>
             <td>{{property.name}}</td>
             <td>{{property.brand}}</td>
             <td>{{property.phone}}</td>
