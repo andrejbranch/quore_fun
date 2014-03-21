@@ -14,9 +14,7 @@ services.factory('Property', ['$resource', function ($resource) {
 
 // Controllers
 
-controllers.controller('HomeController', function HomeController ($scope) {
-    console.info('Im home')
-})
+controllers.controller('HomeController', function HomeController ($scope) {})
 
 controllers.controller('RegionListController', function ($scope, Region) {
     $scope.regions = Region.query()
@@ -114,15 +112,15 @@ controllers.controller('PropertyCreateController', function ($scope, Property, $
 })
 
 controllers.controller('PropertyDeleteController', function ($scope, Property, $stateParams, $state) {
-    $scope.property = Property.get({propertyId:$stateParams.propertyId})
+    $scope.property = Property.get({regionId:$stateParams.regionId, propertyId:$stateParams.propertyId})
 
     $scope.cancel = function () {
         window.history.back();
     }
 
     $scope.delete = function () {
-        $scope.property.$delete({propertyId:$stateParams.propertyId}, function () {
-            $state.go('propertyList')
+        $scope.property.$delete({regionId:$stateParams.regionId, propertyId:$stateParams.propertyId}, function () {
+            $state.go('region', {regionId:$stateParams.regionId})
         })
     }
 })
@@ -190,7 +188,7 @@ app.config(['$stateProvider', function ($stateProvider) {
             controller: 'PropertyEditController'
         })
         .state('propertyDelete', {
-            url: '/property/:propertyId/delete',
+            url: '/property/:regionId/:propertyId/delete',
             templateUrl: '/app/partials/property/delete.html',
             controller: 'PropertyDeleteController'
         })

@@ -22,6 +22,13 @@ class PropertyController extends QuoreController
 
     public function update($request, $response)
     {
+        $property = $this->getProperty($request->params['propertyId']);
+
+        $formData = $this->decodeJsonData($request);
+
+        $property->hydrateFromArray($formData);
+
+        $this->getEntityManager()->flush();
     }
 
     public function create($request, $response)
@@ -41,6 +48,11 @@ class PropertyController extends QuoreController
 
     public function delete($request, $response)
     {
+        $property = $this->getProperty($request->params['propertyId']);
+
+        $em = $this->getEntityManager();
+        $em->remove($property);
+        $em->flush();
     }
 
     private function getRegion($regionId)
@@ -50,8 +62,6 @@ class PropertyController extends QuoreController
 
     private function getProperty($propertyId)
     {
-        $propertyRepository = $this->getPropertyRepository();
-
         return $this->getPropertyRepository()->find($propertyId);
     }
 

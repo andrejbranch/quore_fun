@@ -1,0 +1,33 @@
+<div id="region-delete-container">
+    <h1>Are you sure you want to delete Property {{property.id}} ?</h1>
+    <div class="table-container">
+        <table class="quore-detail-table">
+            <tbody>
+                <tr>
+                    <td>Id</td>
+                    <td>{{property.id}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{property.name}}</td>
+                </tr>
+                <tr>
+                    <td>Brand</td>
+                    <td>{{property.brand}}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{{property.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Url</td>
+                    <td>{{property.url}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="actions">
+            <button class="btn btn-danger" ng-click="delete()">Delete</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</div>
