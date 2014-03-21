@@ -15,7 +15,7 @@ Clone the project and install its dependencies:
     cd quore_fun/
     composer install
 
-Create the database config file config/databases.yml that looks like this
+Create the database config file config/database.yml that looks like this
 
     database:
         driver: pdo_mysql
