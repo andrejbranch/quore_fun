@@ -62,7 +62,7 @@ abstract class QuoreController
     private function initializeEntityManager()
     {
         $paths = array("src/QuoreFun/Entity");
-        $isDevMode = true;
+        $isDevMode = false;
 
         // the connection configuration
         $connectionParams = Yaml::parse(file_get_contents(__DIR__.'/../../../config/database.yml'));

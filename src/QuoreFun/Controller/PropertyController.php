@@ -36,6 +36,8 @@ class PropertyController extends QuoreController
         }
 
         $this->getEntityManager()->flush();
+
+        $this->returnJsonResponse($property->toArray(), $response);
     }
 
     public function create($request, $response)
@@ -58,6 +60,8 @@ class PropertyController extends QuoreController
         $em = $this->getEntityManager();
         $em->persist($property);
         $em->flush();
+
+        $this->returnJsonResponse($property->toArray(), $response);
     }
 
     public function delete($request, $response)
