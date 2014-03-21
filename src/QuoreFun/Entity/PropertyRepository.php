@@ -9,7 +9,7 @@ class PropertyRepository extends EntityRepository
     public function findByRegionToArray($regionId)
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.region r')
+            ->innerJoin('p.region', 'r')
             ->where('r.id = :regionId')
             ->setParameter('regionId', $regionId)
             ->getQuery()
@@ -20,7 +20,7 @@ class PropertyRepository extends EntityRepository
     public function findByRegionId($regionId)
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.region r')
+            ->innerJoin('p.region', 'r')
             ->where('r.id = :regionId')
             ->setParameter('regionId', $regionId)
             ->getQuery()
