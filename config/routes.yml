@@ -1,0 +1,25 @@
+home:
+    path: '/'
+    get: ['QuoreFun\Controller\HomeController', 'getHomepage']
+
+region:
+    path: '/region/{id}'
+    get: ['QuoreFun\Controller\RegionController', 'get']
+    post: ['QuoreFun\Controller\RegionController', 'update']
+    delete: ['QuoreFun\Controller\RegionController', 'delete']
+
+region_query_create:
+    path: '/region'
+    get: ['QuoreFun\Controller\RegionController', 'query']
+    post: ['QuoreFun\Controller\RegionController', 'create']
+
+property:
+    path: '/property/{regionId}/{propertyId}'
+    get: ['QuoreFun\Controller\PropertyController', 'get']
+    post: ['QuoreFun\Controller\PropertyController', 'update']
+    delete: ['QuoreFun\Controller\PropertyController', 'delete']
+
+property_query__create:
+    path: '/property/{regionId}'
+    get: ['QuoreFun\Controller\PropertyController', 'query']
+    post: ['QuoreFun\Controller\PropertyController', 'create']

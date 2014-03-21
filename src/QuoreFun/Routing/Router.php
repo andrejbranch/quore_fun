@@ -2,6 +2,8 @@
 
 namespace QuoreFun\Routing;
 
+use Symfony\Component\Yaml\Yaml;
+
 class Router
 {
     /**
@@ -23,35 +25,11 @@ class Router
 
     private function loadRoutes()
     {
-        $this->router->addRoute(array(
-            'path' => '/',
-            'get' => array('QuoreFun\Controller\HomeController', 'getHomepage'),
-        ));
+        // the connection configuration
+        $routes = Yaml::parse(file_get_contents(__DIR__.'/../../../config/routes.yml'));
 
-        $this->router->addRoute(array(
-            'path' => '/region/{id}',
-            'get' => array('QuoreFun\Controller\RegionController', 'get'),
-            'post' => array('QuoreFun\Controller\RegionController', 'update'),
-            'delete' => array('QuoreFun\Controller\RegionController', 'delete'),
-        ));
-
-        $this->router->addRoute(array(
-            'path' => '/region',
-            'get' => array('QuoreFun\Controller\RegionController', 'query'),
-            'post' => array('QuoreFun\Controller\RegionController', 'create'),
-        ));
-
-        $this->router->addRoute(array(
-            'path' => '/property/{regionId}/{propertyId}',
-            'get' => array('QuoreFun\Controller\PropertyController', 'get'),
-            'post' => array('QuoreFun\Controller\PropertyController', 'update'),
-            'delete' => array('QuoreFun\Controller\PropertyController', 'delete'),
-        ));
-
-        $this->router->addRoute(array(
-            'path' => '/property/{regionId}',
-            'get' => array('QuoreFun\Controller\PropertyController', 'query'),
-            'post' => array('QuoreFun\Controller\PropertyController', 'create'),
-        ));
+        foreach ($routes as $route) {
+            $this->router->addRoute($route);
+        }
     }
 }
