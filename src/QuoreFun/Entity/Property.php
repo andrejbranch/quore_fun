@@ -43,6 +43,7 @@ class Property implements Verifiable
      * @ORM\Column(type="string", length=25)
      * @Assert\LengthConstraint(length=25)
      * @Assert\NotNullConstraint()
+     * @Assert\PhoneConstraint()
      */
     protected $phone;
 
