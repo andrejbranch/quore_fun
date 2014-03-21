@@ -178,7 +178,7 @@ app.config(['$stateProvider', function ($stateProvider) {
             controller: 'PropertyController'
         })
         .state('propertyCreate', {
-            url: '/property/:regionId/:propertyId/create',
+            url: '/property/:regionId/create',
             templateUrl: '/app/partials/property/edit.html',
             controller: 'PropertyCreateController'
         })
