@@ -48,6 +48,11 @@ class Property implements Verifiable
     protected $phone;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $fullService = false;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\LengthConstraint(length=255)
      * @Assert\NotNullConstraint()
@@ -89,6 +94,16 @@ class Property implements Verifiable
         return $this->brand;
     }
 
+    public function setFullService($fullService)
+    {
+        $this->fullService = (bool) $fullService;
+    }
+
+    public function isFullService()
+    {
+        return $this->fullService;
+    }
+
     public function setPhone($phone)
     {
         $this->phone = $phone;
@@ -121,6 +136,7 @@ class Property implements Verifiable
             'name' => $this->name,
             'brand' => $this->brand,
             'phone' => $this->phone,
+            'fullService' => $this->fullService,
             'url' => $this->url,
         );
 
@@ -136,6 +152,7 @@ class Property implements Verifiable
         $this->name = isset($data['name']) ? $data['name'] : null;
         $this->brand = isset($data['brand']) ? $data['brand'] : null;
         $this->phone = isset($data['phone']) ? $data['phone'] : null;
+        $this->fullService = isset($data['fullService']) ? $data['fullService'] : null;
         $this->url = isset($data['url']) ? $data['url'] : null;
     }
 }
