@@ -25,6 +25,11 @@ Create the database config file config/database.yml that looks like this
 
 Replace the user and password if necessary
 
+Create the quore_fun database
+
+    mysql -u root -p
+    create database quore_fun
+
 From the root directory tell doctrine to build the database schema and generate proxies
 
     php vendor/bin/doctrine orm:schema-tool:create
