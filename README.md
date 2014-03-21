@@ -30,7 +30,7 @@ From the root directory tell doctrine to build the database schema and generate 
     php vendor/bin/doctrine orm:schema-tool:create
     php vendor/bin/doctrine orm:generate-proxies
 
-Setup apache server something like this
+Setup apache server something like this and make sure webserver user has appropriate permissions e.g (chgrp -R apache ./*)
 
     <VirtualHost *:80>
         DocumentRoot /var/www/quore_fun/web
