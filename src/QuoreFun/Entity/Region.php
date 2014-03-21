@@ -13,7 +13,7 @@ class Region
     /** @Id @Column(type="integer") @GeneratedValue **/
     protected $id;
 
-    /** @Column(type="string") **/
+    /** @Column(type="string", length=50) **/
     protected $name;
 
     /** @ORM\OneToMany(targetEntity="QuoreFun\Entity\Property", mappedBy="region") */

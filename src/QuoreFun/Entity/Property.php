@@ -22,16 +22,16 @@ class Property
      */
     protected $region;
 
-    /** @Column(type="string") **/
+    /** @Column(type="string", length=50) **/
     protected $name;
 
-    /** @Column(type="string") **/
+    /** @Column(type="string", length=25) **/
     protected $brand;
 
-    /** @Column(type="string") **/
+    /** @Column(type="string", length=25) **/
     protected $phone;
 
-    /** @Column(type="string") **/
+    /** @Column(type="string", length=255) **/
     protected $url;
 
     public function setRegion(Region $region)
