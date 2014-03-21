@@ -25,8 +25,14 @@ class RegionController extends QuoreController
         $formData = $this->decodeJsonData($request);
 
         $region = $this->getRegion($request->params['id']);
+        $region->hydrateFromArray($formData);
 
-        $region->setName($formData['name']);
+        if (!$this->getValidator()->isValid($region)) {
+            // some constraint has failed so we better not flush
+            $region->setErrors($this->getValidator()->getErrors());
+
+            $this->returnJsonResponse($region->toArray(), $response);
+        }
 
         // save changes to the db
         $this->getEntityManager()->flush();
@@ -41,9 +47,18 @@ class RegionController extends QuoreController
         $region = new Region();
         $region->hydrateFromArray($formData);
 
+        if (!$this->getValidator()->isValid($region)) {
+            // some constraint has failed so we better not flush
+            $region->setErrors($this->getValidator()->getErrors());
+
+            $this->returnJsonResponse($region->toArray(), $response);
+        }
+
         $em = $this->getEntityManager();
         $em->persist($region);
         $em->flush();
+
+        $this->returnJsonResponse($region->toArray(), $response);
     }
 
     public function delete($request, $response)

@@ -4,8 +4,8 @@
     "type": "project",
     "require": {
         "doctrine/orm": "2.4.*",
-        "zaphpa/zaphpa": "1.x"
-
+        "zaphpa/zaphpa": "1.x",
+        "symfony/yaml": "2.4.*"
     },
     "autoload": {
         "psr-0": {"": "src/"}

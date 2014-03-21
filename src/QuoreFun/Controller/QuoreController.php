@@ -4,6 +4,8 @@ namespace QuoreFun\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
+use QuoreFun\Service\Validation\Validator;
+use Symfony\Component\Yaml\Yaml;
 
 abstract class QuoreController
 {
@@ -11,6 +13,11 @@ abstract class QuoreController
      * @var Doctrine\ORM\EntityManager
      */
     private $entityManager;
+
+    /**
+     * @var QuoreFun\Service\Validation\Validator
+     */
+    private $validator;
 
     public function __construct()
     {
@@ -41,21 +48,25 @@ abstract class QuoreController
         return $this->entityManager;
     }
 
+    protected function getValidator()
+    {
+        if (!$this->validator) {
+            $this->validator = new Validator();
+        }
+
+        return $this->validator;
+    }
+
     private function initializeEntityManager()
     {
         $paths = array("src/QuoreFun/Entity");
         $isDevMode = true;
 
         // the connection configuration
-        $dbParams = array(
-            'driver'   => 'pdo_mysql',
-            'user'     => 'root',
-            'password' => '',
-            'dbname'   => 'quore_fun',
-        );
+        $yamlParams = Yaml::parse(file_get_contents(__DIR__.'/../../../config/database.yml'));
 
         $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 
-        $this->entityManager = EntityManager::create($dbParams, $config);
+        $this->entityManager = EntityManager::create($yamlParams['database'], $config);
     }
 }

@@ -35,8 +35,10 @@ controllers.controller('RegionEditController', function ($scope, Region, $stateP
     }
 
     $scope.save = function () {
-        $scope.region.$save({regionId:$stateParams.regionId}, function () {
-            $state.go('region', {regionId:$stateParams.regionId})
+        $scope.region.$save({regionId:$stateParams.regionId}, function (region) {
+            if (typeof region.errors == 'undefined') {
+                $state.go('region', {regionId:$stateParams.regionId})
+            }
         })
     }
 })
@@ -49,8 +51,10 @@ controllers.controller('RegionCreateController', function ($scope, Region, $stat
     }
 
     $scope.save = function () {
-        $scope.region.$save({}, function () {
-            $state.go('regionList')
+        $scope.region.$save({}, function (region) {
+            if (typeof region.errors == 'undefined') {
+                $state.go('regionList')
+            }
         })
     }
 })
@@ -90,8 +94,10 @@ controllers.controller('PropertyEditController', function ($scope, Property, $st
     }
 
     $scope.save = function () {
-        $scope.property.$save({regionId:regionId, propertyId:propertyId}, function () {
-            $state.go('region', {regionId:regionId})
+        $scope.property.$save({regionId:regionId, propertyId:propertyId}, function (property) {
+            if (typeof property.errors == 'undefined') {
+                $state.go('region', {regionId:regionId})
+            }
         })
     }
 })
@@ -105,8 +111,10 @@ controllers.controller('PropertyCreateController', function ($scope, Property, $
     }
 
     $scope.save = function () {
-        $scope.property.$save({regionId:$stateParams.regionId}, function () {
-            $state.go('region', {regionId:$stateParams.regionId})
+        $scope.property.$save({regionId:$stateParams.regionId}, function (property) {
+            if (typeof property.errors == 'undefined') {
+                $state.go('region', {regionId:$stateParams.regionId})
+            }
         })
     }
 })

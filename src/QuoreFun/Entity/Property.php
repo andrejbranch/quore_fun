@@ -3,12 +3,13 @@
 namespace QuoreFun\Entity;
 
 use QuoreFun\Entity\Region;
+use QuoreFun\Service\Validation\Verifiable;
 
 /**
  * @Entity(repositoryClass="PropertyRepository")
  * @Table(name="properties")
  */
-class Property
+class Property implements Verifiable
 {
     /**
      * @Id @Column(type="integer")
@@ -33,6 +34,11 @@ class Property
 
     /** @Column(type="string", length=255) **/
     protected $url;
+
+    /**
+     * @var array transient
+     */
+    protected $errors;
 
     public function setRegion(Region $region)
     {
@@ -84,15 +90,26 @@ class Property
         return $this->url;
     }
 
+    public function setErrors($errors)
+    {
+        $this->errors = $errors;
+    }
+
     public function toArray()
     {
-        return array(
+        $data = array(
             'id' => $this->id,
             'name' => $this->name,
             'brand' => $this->brand,
             'phone' => $this->phone,
             'url' => $this->url,
         );
+
+        if ($this->errors) {
+            $data['errors'] = $this->errors;
+        }
+
+        return $data;
     }
 
     public function hydrateFromArray(array $data)
@@ -101,5 +118,47 @@ class Property
         $this->brand = $data['brand'];
         $this->phone = $data['phone'];
         $this->url = $data['url'];
+    }
+
+    public function getPropertyValidators()
+    {
+        return array(
+            array(
+                'property' => 'name',
+                'constraint' => 'LengthConstraint',
+                'length' => '50',
+            ),
+            array(
+                'property' => 'name',
+                'constraint' => 'NotNullConstraint',
+            ),
+            array(
+                'property' => 'brand',
+                'constraint' => 'LengthConstraint',
+                'length' => '50',
+            ),
+            array(
+                'property' => 'brand',
+                'constraint' => 'NotNullConstraint',
+            ),
+            array(
+                'property' => 'phone',
+                'constraint' => 'LengthConstraint',
+                'length' => '50',
+            ),
+            array(
+                'property' => 'phone',
+                'constraint' => 'NotNullConstraint',
+            ),
+            array(
+                'property' => 'url',
+                'constraint' => 'LengthConstraint',
+                'length' => '50',
+            ),
+            array(
+                'property' => 'url',
+                'constraint' => 'NotNullConstraint',
+            ),
+        );
     }
 }

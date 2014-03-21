@@ -28,6 +28,13 @@ class PropertyController extends QuoreController
 
         $property->hydrateFromArray($formData);
 
+        if (!$this->getValidator()->isValid($property)) {
+            // some constraint has failed so we better not flush
+            $property->setErrors($this->getValidator()->getErrors());
+
+            $this->returnJsonResponse($property->toArray(), $response);
+        }
+
         $this->getEntityManager()->flush();
     }
 
@@ -40,6 +47,13 @@ class PropertyController extends QuoreController
         $property = new Property();
         $property->setRegion($region);
         $property->hydrateFromArray($formData);
+
+        if (!$this->getValidator()->isValid($property)) {
+            // some constraint has failed so we better not flush
+            $property->setErrors($this->getValidator()->getErrors());
+
+            $this->returnJsonResponse($property->toArray(), $response);
+        }
 
         $em = $this->getEntityManager();
         $em->persist($property);
